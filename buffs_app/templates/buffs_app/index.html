@@ -1,0 +1,22 @@
+<!-- inherit from base.html-->
+{% extends "buffs_app/base_template.html" %}
+
+<!-- Replace block content in base_template.html -->
+{% block content %}
+    <h1>Welcome to Shift Swap</h1>
+    <h3>Shift Swap is a localized and easy way to exchange shifts among servers working at Buffalo Wild Wings</h3>
+    <h4><strong>All available shifts are listed below</strong></h4>
+    <h4><strong>For specific dates and times please use the search option above</strong></h4>
+    <h2>Available Shifts</h2>
+
+    <ul class="list-group" style="background-color:Black; color:White">
+        {% for i in available_shifts %}
+            <li class="list-group-item" style="background-color:Black; color:White"><strong>Date: </strong>{{i.date}} 
+                <p><strong>Server: </strong> {{ i.server.name }} </p>
+                <p><strong>Position: </strong> {{ i.position }} </p>
+                <p><strong>Time: </strong> {{ i.time }} <a class="btn btn-warning text-black" href="{{ i.get_absolute_url }}">View</a>
+                </p>
+            </li>
+        {% endfor %}
+    </ul>    
+{% endblock %}

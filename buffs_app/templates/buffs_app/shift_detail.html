@@ -1,0 +1,12 @@
+{% extends 'buffs_app/base_template.html' %}
+
+{% block content %}
+    <h1>Shift Details</h1>
+    <h2>Date: {{ shift.date }}</h2>
+    <p><strong>Time: </strong> {{ shift.time }}</p>
+    <p><strong>Available: </strong>{{ shift.is_available }}</p>
+    <p><strong>Position: </strong>{{ shift.position }}</p>
+    <p><strong>Server: </strong>
+    <a href="{{ shift.server.get_absolute_url }}">{{ shift.server.name }} </a>
+    </p>
+{% endblock %}

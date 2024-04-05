@@ -1,0 +1,72 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  {% load django_bootstrap5 %}
+  {% bootstrap_css %} 
+  {% bootstrap_javascript %}
+  {% bootstrap_messages %}
+   <title>UCCS CS Students</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+   <style>
+    body {background-color: Black; color: GoldenRod;}
+    h1   {background-color: Black; color: GoldenRod;}
+    h2 {background-color: Black; color: GoldenRod}
+    h3    {background-color: Black; color: White;}
+    h4    {background-color: Black; color: White;}
+    p    {background-color: Black; color: White;}
+    strong {background-color: Black; color: White;}
+    a:nav-link {background-color: Black; color: GoldenRod;}
+    container {background-color: Black; color: White}
+    ul {background-color: Black; color: White}
+
+  </style>
+ </head>
+
+
+ <body>
+   <div class="container-fluid">
+
+
+     <!-- Navbar-->
+     <nav class="navbar navbar-expand-lg">
+       <img src="{% static 'images/buffs-static2.png' %}">
+       <div class="container-fluid">
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+           <div class="navbar-nav">
+            <h1>
+             <!--  {% url 'index' %}  is defined in url path to dynamically create url -->
+             <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="color:GoldenRod">HOME</a>
+            </h1>
+            <h1>
+             <a class="nav-link" href="{% url 'shifts' %}" style="color:GoldenRod">SEARCH</a>
+            </h1>
+             <h1>
+             {% if user.is_authenticated %}
+               <a class="nav-link" href="{% url 'logout' %}?next={{ request.path }}" style="color:GoldenRod">LOGOUT {{user}}</a>
+             {% else %}
+               <a class="nav-link" href="{% url 'login' %}?next={{ request.path }}" style="color:GoldenRod">LOGIN</a>
+             {% endif %}
+            </h1>
+           </div>
+         </div>
+       </div>
+     </nav>
+
+
+       <div class="col-sm-10">
+         <!-- add block content from html template -->
+         {% block content %}
+         {% endblock %}
+       </div>
+     </div>
+   </div>
+ </body>
+</html>

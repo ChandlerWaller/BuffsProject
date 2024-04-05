@@ -1,0 +1,10 @@
+{% extends 'buffs_app/base_template.html' %}
+
+{% block content %}
+<p><strong>Are you sure you want to remove your shift from: {{ shift.date }}?</p></strong>
+<a class="btn btn-warning text-black" href="{{ shift.server.get_absolute_url }}">Cancel</a>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" action="" value="Delete" style="background-color:Black; color:White">
+</form>
+{% endblock %}

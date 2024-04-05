@@ -1,0 +1,21 @@
+{% extends 'buffs_app/base_template.html' %}
+{% block content %}
+    {% for j in server %}
+    <h1>Server Details</h1>
+    <h2>Name: {{ j.name }}</h2>
+    {% for i in serversShifts %}
+    <a class="btn btn-warning text-black" href="{% url 'create-shift' j.id %}">New Shift</a>
+        {% if i.server.name == j.name %}
+            <div class="container p-5 my-5 border">
+                <p><strong>{{ i.date }}</p></strong>
+                <p><strong>{{ i.time }}</p></strong>
+                <p><strong>{{ i.position }}</p></strong>
+                <a class="btn btn-warning text-black" href="{{ i.get_absolute_url }}">View</a>
+                <a class="btn btn-warning text-black" href="{% url 'update-shift' j.id i.id %}">Update</a>
+                <a class="btn btn-warning text-black" href="{% url 'delete-shift' j.id i.id %}">Delete</a>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+
+{% endblock %}

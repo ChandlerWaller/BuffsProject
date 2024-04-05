@@ -1,0 +1,16 @@
+{% extends 'buffs_app/base_template.html' %}
+
+{% block content %}
+    <h1>All Available Shifts</h1>
+    {% if shift_list %}
+        <ul>
+            {% for shift in shift_list %}
+            <li>
+                <a href="{{ shift.get_absolute_url }}">{{ shift.date }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no shifts currently</p>
+    {% endif %}
+{% endblock %}
