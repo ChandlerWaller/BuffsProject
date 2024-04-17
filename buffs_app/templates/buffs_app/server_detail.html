@@ -3,8 +3,6 @@
     {% for j in server %}
     <h1>Server Details</h1>
     <h2>Name: {{ j.name }}</h2>
-    
-    <a class="btn btn-warning text-black" href="{% url 'create-shift' j.id %}">New Shift</a>
     {% endif %}
     {% for i in serversShifts %}
         {% if i.server.name == j.name %}

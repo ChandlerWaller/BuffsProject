@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
+from django.contrib.auth import *
 from django.http import HttpResponse
 from .models import *
-from .forms import ShiftForm
+from .forms import ShiftForm, LoginForm
 # Create your views here.
 def index(request):
 # Render index.html
@@ -10,11 +11,32 @@ def index(request):
     usersname = request.user.username
     return render( request, 'buffs_app/index.html',{'available_shifts':available_shifts, 'usersname':usersname})
 
-def login():
+def login_view(request):
+    form = LoginForm()
+
+    if request.method == "POST":
+        user_data = request.POST.copy()
+        form = LoginForm(user_data)
+        if form.is_valid():
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('/')
+            else:
+                errorMessage = "Username or Password is Incorrect"
+                context = {'form':form, 'ErrorMessage':"Username or Password was incorrect!"}
+                return render(request, 'buffs_app/Login.html', )
+            
+    context = {'form':form, 'ErrorMessage':""}
+    return render(request, 'buffs_app/Login.html', context)
+
     return render("Login")
 
-def logout():
-    return render("Logout")
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
 def createShift(request):
     form = ShiftForm()

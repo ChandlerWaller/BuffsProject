@@ -7,3 +7,7 @@ class ShiftForm(ModelForm):
     class Meta:
         model = Shift
         fields =('date', 'time', 'is_available', 'position',)
+
+class LoginForm(ModelForm):
+    class Meta:
+        fields =('Username: ', 'Password: ')
