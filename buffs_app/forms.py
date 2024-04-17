@@ -7,8 +7,3 @@ class ShiftForm(ModelForm):
     class Meta:
         model = Shift
         fields =('date', 'time', 'is_available', 'position',)
-
-class ServerForm(ModelForm):
-    class Meta:
-        model = Server
-        fields =('name',)
