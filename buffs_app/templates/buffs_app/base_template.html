@@ -8,21 +8,21 @@
   {% bootstrap_css %} 
   {% bootstrap_javascript %}
   {% bootstrap_messages %}
-   <title>UCCS CS Students</title>
+   <title>Buff's Shift Swap</title>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
    <style>
-    body {background-color: Black; color: GoldenRod;}
-    h1   {background-color: Black; color: GoldenRod;}
-    h2 {background-color: Black; color: GoldenRod}
-    h3    {background-color: Black; color: White;}
-    h4    {background-color: Black; color: White;}
-    p    {background-color: Black; color: White;}
-    strong {background-color: Black; color: White;}
-    a:nav-link {background-color: Black; color: GoldenRod;}
-    container {background-color: Black; color: White}
-    ul {background-color: Black; color: White}
+    body {color: Black;}
+    h1   {color: Black;}
+    h2 {color: Black;}
+    h3    {color: Gray;}
+    h4    {color: Gray;}
+    p    {color: Gray;}
+    strong {color: Black;}
+    a:nav-link {color: Black;}
+    container {color: Black;}
+    ul {color: Black;}
 
   </style>
  </head>
@@ -34,7 +34,7 @@
 
      <!-- Navbar-->
      <nav class="navbar navbar-expand-lg">
-       <img src="{% static 'images/buffs-static2.png' %}">
+       <img src="{% static 'images/buffs-static3.png' %}">
        <div class="container-fluid">
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>
@@ -43,25 +43,25 @@
            <div class="navbar-nav">
             <h1>
              <!--  {% url 'index' %}  is defined in url path to dynamically create url -->
-             <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="color:GoldenRod">HOME</a>
+             <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="color:Black">HOME</a>
             </h1>
             <h1>
-             <a class="nav-link" href="{% url 'shifts' %}" style="color:GoldenRod">SEARCH</a>
+             <a class="nav-link" href="{% url 'shifts' %}" style="color:Black">SEARCH</a>
             </h1>
             
              <h1>
              {% if user.is_authenticated %}
              <h1>
-              <a class="nav-link" href="{% url 'myshifts' %}" style="color:GoldenRod">MY SHIFTS</a>
+              <a class="nav-link" href="{% url 'myshifts' %}" style="color:Black">MY SHIFTS</a>
             </h1><h1>
-               <a class="nav-link" href="{% url 'logout' %}" style="color:GoldenRod">LOGOUT</a>
+               <a class="nav-link" href="{% url 'logout' %}" style="background:#eab448; color:Black">LOGOUT</a>
               </h1>
              {% else %}
              <h1>
-              <a class="nav-link" href="{% url 'register' %}" style="color:GoldenRod">REGISTER</a>
+              <a class="nav-link" href="{% url 'register' %}" style="color:Black">REGISTER</a>
             </h1>
             <h1>
-              <a class="nav-link" href="{% url 'login' %}" style="color:GoldenRod">LOGIN</a>
+              <a class="nav-link" href="{% url 'login' %}" style="background:#eab448; color:Black">LOGIN</a>
             </h1>
              {% endif %}
             </h1>

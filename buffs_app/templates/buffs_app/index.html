@@ -3,25 +3,32 @@
 
 <!-- Replace block content in base_template.html -->
 {% block content %}
-    <h1>Welcome to Shift Swap</h1>
-    <h3>Shift Swap is a localized and easy way to exchange shifts among servers working at Buffalo Wild Wings</h3>
-    <h4><strong>All available shifts are listed below</strong></h4>
-    <h4><strong>For specific dates and times please use the search option above</strong></h4>
-    <h2>Available Shifts</h2>
-
-    <ul class="list-group" style="background-color:Black; color:White">
+    <h1 align="center">Available Shifts</h1>
+    <p></p>
+    <div class="container">
+    <div class="row gx-2">
         {% for i in available_shifts %}
-            <li class="list-group-item" style="background-color:Black; color:White">
+        <div class="col-3" style="border: 2px solid #000;">
+            <div class="card-sm" style="background-color:White; color:Black;">
                 <p><strong>Date: </strong>{{i.date}} </p>
                 <p><strong>Server: </strong> {{ i.username }} </p>
                 <p><strong>Position: </strong> {{ i.position }} </p>
-                <p><strong>Time: </strong> {{ i.time }} <a class="btn btn-warning text-black" href="{{ i.get_absolute_url }}">View</a>
+                <p><strong>Time: </strong> {{ i.time }} </p>
+                {% if i.Taken_By %}
+                <p><strong>Taken By: </strong> {{ i.Taken_By }} </p>
+                {% endif %}
+                <p>
+                <a class="btn btn-warning text-black" href="{{ i.get_absolute_url }}">View</a>
                 {% if usersname == i.username %}
                 <a class="btn btn-warning text-black" href="{% url 'update-shift' i.id %}">Update</a>
                 <a class="btn btn-warning text-black" href="{% url 'delete-shift' i.id %}">Delete</a>
+                {% elif not i.Taken_By and user.is_authenticated %}
+                <a class="btn btn-warning text-black" href="{% url 'take-shift' i.id %}" align="center">Take Shift</a>
                 {% endif %}
                 </p>
-            </li>
+            </div>
+        </div>
         {% endfor %}
-    </ul>    
+    </div> 
+</div>
 {% endblock %}

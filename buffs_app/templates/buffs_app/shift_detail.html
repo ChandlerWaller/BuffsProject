@@ -1,12 +1,20 @@
 {% extends 'buffs_app/base_template.html' %}
 
 {% block content %}
-    <h1>Shift Details</h1>
-    <h2>Date: {{ shift.date }}</h2>
-    <p><strong>Time: </strong> {{ shift.time }}</p>
-    <p><strong>Available: </strong>{{ shift.is_available }}</p>
-    <p><strong>Position: </strong>{{ shift.position }}</p>
-    <p><strong>Server: </strong>
-    <a href="{{ shift.server.get_absolute_url }}">{{ shift.server.name }} </a>
+<div class="container" style="border: 2px solid #000;">
+    <h1 align="center">Shift Details</h1>
+    <h2 align="center">Date: {{ shift.date }}</h2>
+    <p align="center"><strong>Time: </strong> {{ shift.time }}</p>
+    <p align="center"><strong>Available: </strong>{{ shift.is_available }}</p>
+    <p align="center"><strong>Position: </strong>{{ shift.position }}</p>
+    <p align="center"><strong>Server: </strong>{{ shift.username }}
     </p>
+    {% if usersname == shift.username %}
+    <a class="btn btn-warning text-black" href="{% url 'update-shift' shift.id %}" align="center">Update</a>
+    <a class="btn btn-warning text-black" href="{% url 'delete-shift' shift.id %}" align="center">Delete</a>
+    {% else %}
+    <a class="btn btn-warning text-black" href="{% url 'take-shift' shift.id %}" align="center">Take Shift</a>
+    {% endif %}
+    <p></p>
+</div>
 {% endblock %}

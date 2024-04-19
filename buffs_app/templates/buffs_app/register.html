@@ -2,13 +2,17 @@
 
 
 {% block content %}
-<h1>Register a new User</h1>
-<p>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
-<form action="" method="Post" style="background-color:black font-color:white">
+<div class="container" style="border: 2px solid #000;">
+<h1 align="center">Register a new User</h1>
+<p align="center">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
+<form action="" method="Post" style="background-color:black font-color:white" align="center">
     {% csrf_token %}
-    <table>
+    <table align="center">
         {{ form.as_table }}
     </table>
     <input type="submit" name="Submit" style="background-color:Black; color:White"></input>
+    <p></p>
 </form>
+<p></p>
+</div>
 {% endblock %}

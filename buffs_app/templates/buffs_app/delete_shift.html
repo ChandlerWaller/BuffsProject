@@ -2,11 +2,14 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<p><strong>Are you sure you want to remove your shift from: {{ shift.date }}?</p></strong>
-<a class="btn btn-warning text-black" href="{{ shift.server.get_absolute_url }}">Cancel</a>
-<form action="" method="POST">
+<div class="container" style="border: 2px solid #000;">
+<p align="center"><strong>Are you sure you want to remove your shift from: {{ shift.date }}?</p></strong>
+<a class="btn btn-warning text-black" href="{{ shift.server.get_absolute_url }}" align="center">Cancel</a>
+<form action="" method="POST" align="center">
     {% csrf_token %}
-    <input type="submit" action="" value="Delete" style="background-color:Black; color:White">
+    <input type="submit" action="" value="Delete" style="background-color:Black; color:White" align="center">
 </form>
+<p></p>
+</div>
 {% endif %}
 {% endblock %}

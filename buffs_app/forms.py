@@ -12,3 +12,8 @@ class LoginForm(ModelForm):
     class Meta:
         model = UserModel
         fields =('Username', 'Password')
+
+class TakenShiftForm(ModelForm):
+    class Meta:
+        model = Shift
+        fields =('Taken_By',)

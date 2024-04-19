@@ -3,14 +3,17 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<p>Date Format: YYYY-MM-DD</p>
-<p>Time Format: HH:MM:SS  (Military Time)</p>
-<form action="" method="Post" style="background-color:black font-color:white">
+<div class="container" style="border: 2px solid #000;">
+<p align="center">Date Format: YYYY-MM-DD</p>
+<p align="center">Time Format: HH:MM:SS  (Military Time)</p>
+<form action="" method="Post" style="font-color:Black" align="center">
     {% csrf_token %}
-    <table>
+    <table align="center">
         {{ form.as_table }}
     </table>
     <input type="submit" name="Submit" style="background-color:Black; color:White"></input>
 </form>
+<p></p>
+</div>
 {% endif %}
 {% endblock %}

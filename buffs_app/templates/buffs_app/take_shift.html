@@ -1,15 +1,15 @@
 {% extends 'buffs_app/base_template.html' %}
 
-
 {% block content %}
 <div class="container" style="border: 2px solid #000;">
-<h1 align="center">Login</h1>
+<h1 align="center">Take Shift?</h1>
 <form action="" method="Post" align="center">
     {% csrf_token %}
     <table align="center">
         {{ form.as_table }}
     </table>
-    <input type="submit" name="Submit" style="background-color:Black; color:White"></input>
+    <input type="submit" name="Take Shift" style="background-color:Black; color:White">
+    <a class="btn btn-warning text-black" href="{{ shift.server.get_absolute_url }}" align="center">Cancel</a>
 </form>
 <p></p>
 </div>

@@ -3,7 +3,18 @@ from django.contrib.auth.models import User
 from django.contrib.auth import *
 from django.http import HttpResponse
 from .models import *
-from .forms import ShiftForm, LoginForm
+from .forms import *
+
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
+
+def scrap(request):
+    options = Options()
+    options.headless = True
+    options.add_argument("--window-size=1920,1080")
+
+    driver = webdriver.Chrome(options=options)
 # Create your views here.
 def index(request):
 # Render index.html
@@ -109,3 +120,24 @@ def register(request):
             
     context = {'form':form}
     return render(request, 'buffs_app/register.html', context)
+
+def takeShift(request, pk):
+    form = TakenShiftForm()
+    shift = Shift.objects.get(id=pk)
+
+    if request.method == "POST":
+        shift_data = request.POST.copy()
+        form = TakenShiftForm(shift_data)
+        if form.is_valid():
+            shift.Taken_By = form.cleaned_data.get('Taken_By')
+            shift.save()
+
+            return redirect('/')
+    else:
+        form = TakenShiftForm(initial={'Taken_By':request.user.username})
+        
+    context = {'form': form}
+    return render(request, 'buffs_app/take_shift.html', context)
+
+def shiftdetail(request, pk):
+    shift = Shift.objects.get(id=pk)

@@ -24,6 +24,7 @@ class Shift(models.Model):
     is_available = models.BooleanField(default=True)
     position = models.CharField(max_length=200, choices=POSITION, default='Position of Shift')
     username = models.CharField(max_length=200, default=" ")
+    Taken_By = models.CharField(max_length=200, blank=True)
     def __str__(self):
         return (self.position + " " + str(self.date) + " " + self.username)
     def get_absolute_url(self):
@@ -31,7 +32,6 @@ class Shift(models.Model):
 
 class ShiftListView(generic.ListView):
     model = Shift
-
+    
 class ShiftDetailView(generic.DetailView):
     model = Shift
-    
