@@ -1,0 +1,33 @@
+{% extends "buffs_app/base_template.html" %}
+
+<!-- Replace block content in base_template.html -->
+{% block content %}
+    {% if not my_shifts %}
+    <h1>You do not have any shifts posted</h1>
+    {% else %}
+    <h1>Your Shifts:</h1>
+    {% endif %}
+    {% if user.is_authenticated %}
+    <a class="btn btn-warning text-black" href="{% url 'create-shift' %}">New Shift</a>
+    {% endif %}
+    <p></p>
+    <ul class="list-group" style="background-color:Black; color:White">
+    <div class="row">
+        {% for i in my_shifts %}
+        <div class="col-4" style="border: 1px solid #FFF;">
+            <div class="card-sm" style="background-color:Black; color:White;">
+                <p><strong>Date: </strong>{{i.date}} </p>
+                <p><strong>Server: </strong> {{ i.username }} </p>
+                <p><strong>Position: </strong> {{ i.position }} </p>
+                <p><strong>Time: </strong> {{ i.time }} </p>
+                <p>
+                <a class="btn btn-warning text-black" href="{{ i.get_absolute_url }}">View</a>
+                <a class="btn btn-warning text-black" href="{% url 'update-shift' i.id %}">Update</a>
+                <a class="btn btn-warning text-black" href="{% url 'delete-shift' i.id %}">Delete</a>
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </ul>    
+{% endblock %}

@@ -2,9 +2,8 @@
 
 
 {% block content %}
-{% if user.is_authenticated %}
-<p>Date Format: YYYY-MM-DD</p>
-<p>Time Format: HH:MM:SS  (Military Time)</p>
+<h1>Register a new User</h1>
+<p>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
 <form action="" method="Post" style="background-color:black font-color:white">
     {% csrf_token %}
     <table>
@@ -12,5 +11,4 @@
     </table>
     <input type="submit" name="Submit" style="background-color:Black; color:White"></input>
 </form>
-{% endif %}
 {% endblock %}

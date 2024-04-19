@@ -16,4 +16,6 @@ path('shift/<int:pk>', views.ShiftDetailView.as_view(), name='shift-detail'),
 path('update_shift/<int:pk>', views.updateShift, name='update-shift'),
 path('create_shift', views.createShift, name='create-shift'),
 path('delete_shift/<int:pk>', views.deleteShift, name='delete-shift'),
+path('usershifts', views.myshifts, name='myshifts'),
+path('register', views.register, name='register'),
 ]

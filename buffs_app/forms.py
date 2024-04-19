@@ -10,4 +10,5 @@ class ShiftForm(ModelForm):
 
 class LoginForm(ModelForm):
     class Meta:
-        fields =('Username: ', 'Password: ')
+        model = UserModel
+        fields =('Username', 'Password')

@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.contrib.auth.models import User
 from django.contrib.auth import *
 from django.http import HttpResponse
 from .models import *
@@ -22,17 +23,14 @@ def login_view(request):
             password = request.POST["password"]
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                login(request, user)
+                login(request, user, backend=None)
                 return redirect('/')
             else:
-                errorMessage = "Username or Password is Incorrect"
-                context = {'form':form, 'ErrorMessage':"Username or Password was incorrect!"}
-                return render(request, 'buffs_app/Login.html', )
+                context = {'form':form}
+                return render(request, 'buffs_app/login.html', context)
             
-    context = {'form':form, 'ErrorMessage':""}
-    return render(request, 'buffs_app/Login.html', context)
-
-    return render("Login")
+    context = {'form':form}
+    return render(request, 'buffs_app/login.html', context)
 
 def logout_view(request):
     logout(request)
@@ -85,3 +83,29 @@ def deleteShift(request, pk):
         
     context = {'form':form, 'shift':shift}
     return render(request, 'buffs_app/delete_shift.html', context)
+
+def myshifts(request):
+    my_shifts = Shift.objects.all().filter(username=request.user.username)
+    print("my shift query set", my_shifts)
+    return render( request, 'buffs_app/myshifts.html',{'my_shifts':my_shifts})
+
+def register(request):
+    form = LoginForm()
+
+    if request.method == "POST":
+        user_data = request.POST.copy()
+        form = LoginForm(user_data)
+        if form.is_valid():
+            username = request.POST["Username"]
+            password = request.POST["Password"]
+            User.objects.create_user(username, email=None, password=password)
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user, backend=None)
+                return redirect('/')
+            else:
+                context = {'form':form}
+                return render(request, 'buffs_app/register.html', context)
+            
+    context = {'form':form}
+    return render(request, 'buffs_app/register.html', context)

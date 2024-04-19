@@ -4,6 +4,10 @@ from django.views import generic
 
 # Create your models here.
 
+class UserModel(models.Model):
+    Username = models.CharField(max_length=200, blank=False)
+    Password = models.CharField(max_length=200, blank=False)
+
 class Shift(models.Model):
 
     #List of choices for shift position
