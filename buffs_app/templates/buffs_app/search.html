@@ -2,8 +2,8 @@
 
 {% block content %}
 <div class="container" style="border: 2px solid #000;">
+<h1 align="center">Search by Date</h1>
 <p align="center">Date Format: YYYY-MM-DD</p>
-<p align="center">Time Format: HH:MM:SS  (Military Time)</p>
 <form action="" method="Post" align="center">
     {% csrf_token %}
     <table align="center">
@@ -12,5 +12,33 @@
     <input type="submit" name="Submit" style="background-color:Black; color:White">
 </form>
 <p></p>
+</div>
+<p></p>
+
+<div class="container">
+    <div class="row gx-2">
+        {% for i in searchedShifts %}
+        <div class="col-3" style="border: 2px solid #000;">
+            <div class="card-sm" style="background-color:White; color:Black;">
+                <p><strong>Date: </strong>{{i.date}} </p>
+                <p><strong>Server: </strong> {{ i.username }} </p>
+                <p><strong>Position: </strong> {{ i.position }} </p>
+                <p><strong>Time: </strong> {{ i.time }} </p>
+                {% if i.Taken_By %}
+                <p><strong>Taken By: </strong> {{ i.Taken_By }} </p>
+                {% endif %}
+                <p>
+                <a class="btn btn-warning text-black" href="{{ i.get_absolute_url }}">View</a>
+                {% if usersname == i.username %}
+                <a class="btn btn-warning text-black" href="{% url 'update-shift' i.id %}">Update</a>
+                <a class="btn btn-warning text-black" href="{% url 'delete-shift' i.id %}">Delete</a>
+                {% elif not i.Taken_By and user.is_authenticated %}
+                <a class="btn btn-warning text-black" href="{% url 'take-shift' i.id %}" align="center">Take Shift</a>
+                {% endif %}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div> 
 </div>
 {% endblock %}

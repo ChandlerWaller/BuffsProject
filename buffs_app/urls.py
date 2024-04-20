@@ -19,4 +19,5 @@ path('delete_shift/<int:pk>', views.deleteShift, name='delete-shift'),
 path('usershifts', views.myshifts, name='myshifts'),
 path('register', views.register, name='register'),
 path('take_shift/<int:pk>', views.takeShift, name='take-shift'),
+path('search', views.SearchShift, name='search-shift'),
 ]

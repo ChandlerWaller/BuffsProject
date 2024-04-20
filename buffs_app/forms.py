@@ -17,3 +17,8 @@ class TakenShiftForm(ModelForm):
     class Meta:
         model = Shift
         fields =('Taken_By',)
+
+class SearchForm(ModelForm):
+    class Meta:
+        model = Shift
+        fields =('date',)

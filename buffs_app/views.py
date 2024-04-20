@@ -66,6 +66,7 @@ def createShift(request):
 def updateShift(request, pk):
     form = ShiftForm()
     shift = Shift.objects.get(id=pk)
+    usersname = request.user.username
 
     if request.method == "POST":
         shift_data = request.POST.copy()
@@ -81,7 +82,7 @@ def updateShift(request, pk):
     else:
         form = ShiftForm(initial={'date':shift.date, 'time':shift.time, 'is_available':shift.is_available})
         
-    context = {'form': form}
+    context = {'form': form, 'usersname':usersname}
     return render(request, 'buffs_app/update_shift.html', context)
 
 def deleteShift(request, pk):
@@ -139,5 +140,19 @@ def takeShift(request, pk):
     context = {'form': form}
     return render(request, 'buffs_app/take_shift.html', context)
 
-def shiftdetail(request, pk):
-    shift = Shift.objects.get(id=pk)
+def SearchShift(request):
+    form = SearchForm()
+    usersname = request.user.username
+    searchedShifts = Shift.objects.all()
+
+    if request.method == "POST":
+        shift_data = request.POST.copy()
+        form = SearchForm(shift_data)
+        if form.is_valid():
+            searchdate = form.cleaned_data.get('date')
+            searchedShifts = Shift.objects.all().filter(date=searchdate)
+            context = {'form':form, 'searchedShifts':searchedShifts, 'usersname':usersname}
+            return render(request, 'buffs_app/search.html', context)
+        
+    context = {'form':form, 'searchedShifts':searchedShifts, 'usersname':usersname}
+    return render(request, 'buffs_app/search.html', context)

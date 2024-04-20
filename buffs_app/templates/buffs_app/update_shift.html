@@ -1,6 +1,7 @@
 {% extends 'buffs_app/base_template.html' %}
 
 {% block content %}
+{% if usersname == i.username %}
 <div class="container" style="border: 2px solid #000;">
 <p align="center">Date Format: YYYY-MM-DD</p>
 <p align="center">Time Format: HH:MM:SS  (Military Time)</p>
@@ -13,4 +14,5 @@
 </form>
 <p></p>
 </div>
+{% endif %}
 {% endblock %}
